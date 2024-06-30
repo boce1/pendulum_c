@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 
     int p_lenght = 100;
     int p_radius = 20;
-    double startAngle = PI / 4;
+    double startAngle = angles[angleIndex];
     int originX = WIDTH / 2;
     int originY = 0;
     pendulum p(originX, originY, p_lenght, startAngle, p_radius);
@@ -89,6 +89,17 @@ void thetaChange(pendulum &p, double startAngle, double deltaTime)
     // lets assume that ball has mass of 1 so accelaration if equal to horizontal component of gravitationa force
     p.speedAccelaration += (-1 * pendulumForce) / p.lenght;
     p.theta += p.speedAccelaration * deltaTime;
+
+    if(p.theta > angles[angleIndex])
+    {
+        p.theta = angles[angleIndex];
+        p.speedAccelaration = 0;
+    }
+    if(p.theta < -angles[angleIndex])
+    {
+        p.theta = -angles[angleIndex];
+        p.speedAccelaration = 0;
+    }
 }
 
 

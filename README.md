@@ -18,7 +18,7 @@ main.exe
 or oppening the program from the file explorer
 
 
-Note: SDL library in this repo is only compatable with Windows.
+Note: SDL library in this repo is only compatable with Windows. In order to compile this MinGW needs to be installed.
 
 
 To clean object files and executable file run:
