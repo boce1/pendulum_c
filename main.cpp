@@ -14,6 +14,7 @@ int angleIndex = 0;
 
 void draw(SDL_Renderer *renderer, pendulum &p);
 void thetaChange(pendulum &p, double startAngle, double deltaTime);
+void showInfo(SDL_Event event, pendulum *p);
 
 int main(int argc, char* argv[]) 
 {
@@ -63,6 +64,7 @@ int main(int argc, char* argv[])
             }
             p.changeLenght(event, HEIGHT, angles, angleIndex);
             p.changeAngle(event, angles, angles_n, angleIndex);
+            showInfo(event, &p);
         }
         
     }
@@ -87,4 +89,17 @@ void thetaChange(pendulum &p, double startAngle, double deltaTime)
     // lets assume that ball has mass of 1 so accelaration if equal to horizontal component of gravitationa force
     p.speedAccelaration += (-1 * pendulumForce) / p.lenght;
     p.theta += p.speedAccelaration * deltaTime;
+}
+
+
+void showInfo(SDL_Event event, pendulum *p)
+{
+    if(event.type == SDL_KEYDOWN)
+    {
+        if(event.key.keysym.sym == SDLK_SPACE)
+        {
+            std::cout << "Angle: " << angles[angleIndex] / PI * 180 << " degrees / " << angles[angleIndex] <<" radians"<< std::endl;
+            std::cout << "Lenght: " << (*p).lenght << " units" << std::endl << std::endl;
+        }
+    }
 }

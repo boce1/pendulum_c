@@ -31,3 +31,5 @@ Lenght of the pendulum can be changed with "up arrow" and "down arrow".
 
 Agnle can be changed wiht "left arrow" and "right arrow".
 
+Info about lenght of the string and angle can be displayed in terminal with "Space".
+
