@@ -3,14 +3,15 @@ This is pendulum made in cpp using SDL2
 Libs and include files are only complatable with Windows.
 
 To compile files run
-'''bash
+```bash
+git clone https://github.com/boce1/pendulum_c.git
 make
-'''
+```
 
 To delete object file and main.exe run
-'''bash
+```bash
 make clean
-'''
+```
 
 ### Instruction
 Lenght of the pendulum can be changed with "up arrow" and "down arrow".
