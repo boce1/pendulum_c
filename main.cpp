@@ -4,7 +4,7 @@
 #include <cmath>
 
 const int WIDTH = 1000;
-const int HEIGHT = 800;
+const int HEIGHT = 600;
 const double PI = 3.14159;
 const double gravityForce = 0.001;
 
@@ -14,27 +14,33 @@ void thetaChange(pendulum &p, double startAngle, double deltaTime);
 int main(int argc, char* argv[]) 
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window *window = SDL_CreateWindow("hello world", 100, 100, WIDTH, HEIGHT, 0);
+    SDL_Window *window = SDL_CreateWindow("Pendulum", 100, 100, WIDTH, HEIGHT, 0);
     if(window == NULL) 
     {
         return 1;
     }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
-    int p_lenght = 500;
+    int p_lenght = 100;
     int p_radius = 20;
     double startAngle = PI / 4;
     int originX = WIDTH / 2;
     int originY = 0;
     pendulum p(originX, originY, p_lenght, startAngle, p_radius);
 
+    bool KEYS[322];
+    for(int i = 0; i < 322; i++) 
+    {
+        KEYS[i] = false;
+    }
+    
+    //SDL_EnableKeyRepeat(0,0);
+
     bool running = true;
     SDL_Event event;
-    // const Uint8* keyboardState = SDL_GetKeyboardState(NULL);
     Uint64 nowTicks = SDL_GetPerformanceCounter();
     Uint64 lastTicks = 0;
     double deltaTime = 0; 
-    int direction;
     while(running)
     {
         lastTicks = nowTicks;
@@ -44,12 +50,14 @@ int main(int argc, char* argv[])
         //keyboardState = SDL_GetKeyboardState(NULL);
         draw(renderer, p);
         thetaChange(p, startAngle, deltaTime);
+        //p.changeLenght(KEYS);
         if(SDL_PollEvent(&event)) 
         {
             if(event.type == SDL_QUIT)
             {
                 running = false;
             }
+            p.changeLenght(event, HEIGHT);
         }
         
     }

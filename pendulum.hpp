@@ -18,6 +18,7 @@ class pendulum
         pendulum(int x, int y, int len, double angle, int r);
         drawCircle(SDL_Renderer* renderer);
         draw(SDL_Renderer* renderer);
+        changeLenght(SDL_Event event, int screenHeight);
 };
 
 #endif // PENDULUM_H

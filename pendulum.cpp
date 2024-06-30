@@ -21,7 +21,17 @@ pendulum::drawCircle(SDL_Renderer* renderer)
     int32_t tx = 1;
     int32_t ty = 1;
     int32_t error = (tx - diameter);
+
+    struct SDL_Rect ballRect;
+    ballRect.x = origin_x + ball_x + sin(theta) * radius - radius;
+    ballRect.y = origin_y + ball_y + cos(theta) * radius - 2 * radius;
+    ballRect.w = 2 * radius;
+    ballRect.h = 2 * radius;
+    //SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+    //SDL_RenderFillRect(renderer, &ballRect);
+
     SDL_SetRenderDrawColor(renderer, 255,255,255,255);
+    //SDL_RenderDrawRect(renderer, &ballRect);
     while (x >= y)
     {
         SDL_RenderDrawPoint(renderer, origin_x + ball_x + x,origin_y + ball_y - y);
@@ -48,6 +58,7 @@ pendulum::drawCircle(SDL_Renderer* renderer)
         	error += (tx - diameter);
         }
     }
+
 }
 
 pendulum::draw(SDL_Renderer *renderer)
@@ -60,3 +71,38 @@ pendulum::draw(SDL_Renderer *renderer)
     drawCircle(renderer);
 
 }
+
+pendulum::changeLenght(SDL_Event event, int screenHeight)
+{
+    if(event.type == SDL_KEYDOWN)
+    {
+        switch(event.key.keysym.sym)
+        {
+            case SDLK_UP:
+                if(lenght < screenHeight - 2 * radius)
+                {
+                    lenght += 10;
+                }
+                break;
+            case SDLK_DOWN:
+                if(lenght > 2 * radius)
+                {
+                    lenght -= 10;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+}
+//pendulum::changeLenght(bool *keys)
+//{
+//    if(KEYS[SDLK_UP]) 
+//    {
+//        lenght++;
+//    }
+//    if(KEYS[SDLK_DOWN]) 
+//    {
+//        lenght--;
+//    }
+//}
