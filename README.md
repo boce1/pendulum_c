@@ -3,6 +3,8 @@ This is pendulum made in cpp using SDL2
 Libs and include files are only complatable with Windows.
 
 To compile files run
+
+(Makefile can be installed with "choco" package manager) 
 ```bash
 git clone https://github.com/boce1/pendulum_c.git
 make
