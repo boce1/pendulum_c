@@ -24,6 +24,9 @@ int main(int argc, char* argv[])
     {
         return 1;
     }
+    std::cout << "Hello! This is simple pendulum simulator\n";
+    std::cout << "Instructions:\nPress Left Arrow and Right Arrow to change starting angle of pendulum.\n";
+    std::cout << "Press Space to display information about lenght of the string and starting angle.\n";
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 

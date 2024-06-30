@@ -1,35 +1,11 @@
 This is pendulum made in cpp using SDL2     
 
-# Compiling and Running
-Command that will execute instructions from the make file 
-```bash
-make
-```
-This command compiles and links files from the project with sdl libriries     
-Running the program:     
-For UNIX
-```bash
-./main
-```
-For Windows     
-```bash
-main.exe
-```     
-or oppening the program from the file explorer
-
-
-Note: SDL library in this repo is only compatable with Windows. In order to compile this MinGW needs to be installed.
-
-
-To clean object files and executable file run:
-```bash
-make clean
-```
-
-# Instruction
+### Instruction
 Lenght of the pendulum can be changed with "up arrow" and "down arrow".
+
+Up arrow incresses lenght, down arrow decressed lenght of the pendulum.
 
 Agnle can be changed wiht "left arrow" and "right arrow".
 
-Info about lenght of the string and angle can be displayed in terminal with "Space".
+Info about lenght of the string and angle can be displayed in terminal with pressing "Space".
 
