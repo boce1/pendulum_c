@@ -1,4 +1,16 @@
-This is pendulum made in cpp using SDL2     
+This is pendulum made in cpp using SDL2
+
+Libs and include files are only complatable with Windows.
+
+To compile files run
+'''bash
+make
+'''
+
+To delete object file and main.exe run
+'''bash
+make clean
+'''
 
 ### Instruction
 Lenght of the pendulum can be changed with "up arrow" and "down arrow".
