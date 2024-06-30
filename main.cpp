@@ -2,11 +2,15 @@
 #include <SDL2/SDL.h>
 #include "pendulum.hpp"
 #include <cmath>
+#include <sstream>
 
 const int WIDTH = 1000;
 const int HEIGHT = 600;
 const double PI = 3.14159;
 const double gravityForce = 0.001;
+const double angles[] = {PI / 3, PI / 4, PI / 6, PI / 12};
+const int angles_n = sizeof(angles) / sizeof(angles[0]);
+int angleIndex = 0;
 
 void draw(SDL_Renderer *renderer, pendulum &p);
 void thetaChange(pendulum &p, double startAngle, double deltaTime);
@@ -21,6 +25,8 @@ int main(int argc, char* argv[])
     }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+
+
     int p_lenght = 100;
     int p_radius = 20;
     double startAngle = PI / 4;
@@ -28,13 +34,13 @@ int main(int argc, char* argv[])
     int originY = 0;
     pendulum p(originX, originY, p_lenght, startAngle, p_radius);
 
+
     bool KEYS[322];
     for(int i = 0; i < 322; i++) 
     {
         KEYS[i] = false;
     }
     
-    //SDL_EnableKeyRepeat(0,0);
 
     bool running = true;
     SDL_Event event;
@@ -47,24 +53,22 @@ int main(int argc, char* argv[])
         nowTicks = SDL_GetPerformanceCounter();
         deltaTime = (double)((nowTicks - lastTicks)*1000 / (double)SDL_GetPerformanceFrequency());
         
-        //keyboardState = SDL_GetKeyboardState(NULL);
         draw(renderer, p);
         thetaChange(p, startAngle, deltaTime);
-        //p.changeLenght(KEYS);
         if(SDL_PollEvent(&event)) 
         {
             if(event.type == SDL_QUIT)
             {
                 running = false;
             }
-            p.changeLenght(event, HEIGHT);
+            p.changeLenght(event, HEIGHT, angles, angleIndex);
+            p.changeAngle(event, angles, angles_n, angleIndex);
         }
         
     }
 
     SDL_DestroyWindow(window);
     SDL_Quit();
-
     return 0;
 }
 
@@ -83,5 +87,4 @@ void thetaChange(pendulum &p, double startAngle, double deltaTime)
     // lets assume that ball has mass of 1 so accelaration if equal to horizontal component of gravitationa force
     p.speedAccelaration += (-1 * pendulumForce) / p.lenght;
     p.theta += p.speedAccelaration * deltaTime;
-    // std::cout << sin(p.theta) << std::endl;
 }

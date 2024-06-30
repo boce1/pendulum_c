@@ -72,7 +72,7 @@ pendulum::draw(SDL_Renderer *renderer)
 
 }
 
-pendulum::changeLenght(SDL_Event event, int screenHeight)
+pendulum::changeLenght(SDL_Event event, int screenHeight, const double* angles, int angleIndex)
 {
     if(event.type == SDL_KEYDOWN)
     {
@@ -82,12 +82,16 @@ pendulum::changeLenght(SDL_Event event, int screenHeight)
                 if(lenght < screenHeight - 2 * radius)
                 {
                     lenght += 10;
+                    theta = angles[angleIndex];
+                    speedAccelaration = 0;
                 }
                 break;
             case SDLK_DOWN:
                 if(lenght > 2 * radius)
                 {
                     lenght -= 10;
+                    theta = angles[angleIndex];
+                    speedAccelaration = 0;
                 }
                 break;
             default:
@@ -95,14 +99,33 @@ pendulum::changeLenght(SDL_Event event, int screenHeight)
         }
     }
 }
-//pendulum::changeLenght(bool *keys)
-//{
-//    if(KEYS[SDLK_UP]) 
-//    {
-//        lenght++;
-//    }
-//    if(KEYS[SDLK_DOWN]) 
-//    {
-//        lenght--;
-//    }
-//}
+
+pendulum::changeAngle(SDL_Event event, const double* angles, const int sizeAngles, int &angleIndex)
+{
+    if(event.type == SDL_KEYDOWN)
+    {
+        switch(event.key.keysym.sym)
+        {
+            case SDLK_LEFT:
+                angleIndex--;
+                if(angleIndex < 0)
+                {
+                    angleIndex = sizeAngles - 1;
+                }
+                theta = angles[angleIndex];
+                speedAccelaration = 0;
+                break;
+            case SDLK_RIGHT:
+                angleIndex++;
+                if(angleIndex >= sizeAngles)
+                {
+                    angleIndex = 0;
+                }
+                theta = angles[angleIndex];
+                speedAccelaration = 0;
+                break;
+            default:
+                break;
+        }
+    }
+}

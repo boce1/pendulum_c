@@ -27,5 +27,7 @@ make clean
 ```
 
 # Instruction
-With "key_up" and "key_down" lenght of the pendulum can be changed.
+Lenght of the pendulum can be changed with "up arrow" and "down arrow".
+
+Agnle can be changed wiht "left arrow" and "right arrow".
 
